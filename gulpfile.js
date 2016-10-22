@@ -4,6 +4,7 @@ var sass = require('gulp-sass');
 var gutil = require('gulp-util');
 var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
+var cleanCSS = require('gulp-clean-css');
 var gulpIf = require('gulp-if');
 
 var watch = require('gulp-watch');
@@ -25,7 +26,7 @@ gulp.task('styles', function(){
 
 gulp.task('useref', ['styles'], function(){
   return gulp.src('src/*.html')
-	.pipe(useref( { searchPath: ['src', 'build', 'node_modules/bootstrap/dist', 'node_modules/jquery/dist' ]  } ))
+	.pipe(useref( { searchPath: ['src', 'build', 'node_modules/bootstrap/dist', , 'node_modules/tether/dist', 'node_modules/jquery/dist' ]  } ))
 	.pipe(gulpIf('*.js', uglify()))
 	.pipe(gulpIf('*.css', cleanCSS()))
 	.pipe(gulp.dest('dist'))
